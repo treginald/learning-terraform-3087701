@@ -55,3 +55,11 @@ module "web_sg" {
   egress_rules = ["all-all"]
   egress_cidr_blocks = ["0.0.0.0/0"]
 }
+
+resource "aws_route" "private_nat_gateway" {
+  # Other configurations...
+
+  depends_on = [module.vpc.private_route_tables]
+  
+  route_table_id = element(aws_route_table.private[*].id, count.index)
+}

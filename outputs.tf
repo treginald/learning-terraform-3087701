@@ -5,3 +5,7 @@ output "instance_ami" {
 output "instance_arn" {
   value = aws_instance.web.arn
 }
+
+output "private_route_tables" {
+  value = aws_route_table.private[*].id
+}
