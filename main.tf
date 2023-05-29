@@ -23,7 +23,7 @@ module "vpc" {
   azs             = ["us-west-2a", "us-west-2b", "us-west-2c"]
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 
-  enable_nat_gateway = true
+  #enable_nat_gateway = true
 
   tags = {
     Terraform = "true"
@@ -54,12 +54,4 @@ module "web_sg" {
 
   egress_rules = ["all-all"]
   egress_cidr_blocks = ["0.0.0.0/0"]
-}
-
-resource "aws_route" "private_nat_gateway" {
-  # Other configurations...
-
-  depends_on = [module.vpc.private_route_tables]
-  
-  route_table_id = element(aws_route_table.private[*].id, count.index)
 }
