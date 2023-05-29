@@ -38,7 +38,7 @@ module "alb" {
   load_balancer_type = "application"
 
   vpc_id             = data.aws_vpc.default.id
-  security_groups    = module.web_sg.security_group_id
+  security_groups    = [module.web_sg.security_group_id]
 
   target_groups = [
     {
